@@ -1,21 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { StyleSheet } from 'react-native';
+import { GameEngine } from 'react-native-game-engine';
+import Finger from './renderers';
+import MoveFinger from './systems';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: '#FFF'
+  }
 });
+
+const App = () => {
+  return (
+    <GameEngine
+      style={styles.container}
+      systems={[MoveFinger]}
+      entities={{
+        1: { position: [40, 200], renderer: <Finger /> },
+        2: { position: [100, 200], renderer: <Finger /> },
+        3: { position: [160, 200], renderer: <Finger /> },
+        4: { position: [220, 200], renderer: <Finger /> },
+        5: { position: [280, 200], renderer: <Finger /> }
+      }}
+    >
+      <StatusBar hidden />
+    </GameEngine>
+  );
+};
+
+export default App;
